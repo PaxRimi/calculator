@@ -27,36 +27,27 @@ $(() => {
 
     // Add " . " to the screen
     point.on('click', () => {
-        if (pointCounter === 0) {
-            addOperator(".");
-            pointCounter++;
-        } else {
-            alert("You can add only one '.' to number!")
-        }
+        checkPoint();
     });
 
     // Add " + " to the screen
     add.on('click', () => {
         addOperator("+");
-        pointCounter = 0;
     });
 
     // Add " - " to the screen
     subtract.on('click', () => {
         addOperator("-");
-        pointCounter = 0;
     });
 
     // Add " * " to the screen
     multiply.on('click', () => {
         addOperator("*");
-        pointCounter = 0;
     });
 
     // Add " / " to the screen
     divide.on('click', () => {
         addOperator("/");
-        pointCounter = 0;
     });
 
 
@@ -104,34 +95,37 @@ $(() => {
       screen.text('');
     }
 
+    // function that check if there is already point in a number
+    function checkPoint() {
+        let text = screen.text();
+        let poinIndexOf = text.lastIndexOf(".");
+        console.log(typeof poinIndexOf);
+        if ( poinIndexOf === -1 || poinIndexOf < text.lastIndexOf("+") || poinIndexOf < text.lastIndexOf("-") || poinIndexOf < text.lastIndexOf("*") || poinIndexOf < text.lastIndexOf("/")) {
+            addOperator(".");
+        } else {
+            alert("You can add only one '.' to number!")
+        }
+    }
+
     $(window).keydown(function (e) {
         //use e.which
         console.log(e.keyCode);
 
         switch(e.keyCode) {
             case 110:
-                if (pointCounter === 0) {
-                    addOperator(".");
-                    pointCounter++;
-                } else {
-                    alert("You can add only one '.' to number!")
-                }
+                checkPoint();
                 break;
             case 107:
                 addOperator("+");
-                pointCounter = 0;
                 break;
             case 109:
                 addOperator("-");
-                pointCounter = 0;
                 break;
             case 106:
                 addOperator("*");
-                pointCounter = 0;
                 break;
             case 111:
                 addOperator("/");
-                pointCounter = 0;
                 break;
             case 96:
                 showOnScreen(0);
