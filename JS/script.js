@@ -68,6 +68,7 @@ $(() => {
             deleteLast();
             let number = eval((screen.text()));
             screen.text(number);
+            operatorCounter = 0;
         } else {
             let number = eval((screen.text()));
             screen.text(number);
