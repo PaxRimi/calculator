@@ -63,8 +63,15 @@ $(() => {
 
     // function that sum elements from the screen
     function calculate() {
-        let number = eval((screen.text()));
-        screen.text(number);
+        const lastCharacter = screen.text().charAt(screen.text().length - 1);
+        if (lastCharacter === "+" || lastCharacter === "-" || lastCharacter === "*" || lastCharacter === "/") {
+            deleteLast();
+            let number = eval((screen.text()));
+            screen.text(number);
+        } else {
+            let number = eval((screen.text()));
+            screen.text(number);
+        }
     }
 
     //function that delete last character for the screen
